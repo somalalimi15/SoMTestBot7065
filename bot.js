@@ -3,7 +3,6 @@ const client = new Discord.Client();
 const fs = require("fs");      
 const dateFormat = require('dateformat');
 const Canvas = require("canvas"); //npm i canvas
-let profile = JSON.parse(fs.readFileSync("profile.json", "utf8"))
 var prefix = "$"
 
 client.on('message', function(message) {
