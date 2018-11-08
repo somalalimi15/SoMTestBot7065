@@ -60,7 +60,9 @@ client.on('message', function(message) {
         });
     }
 });
+
 /
+
 client.on('message', message => {
          if(message.content === prefix + "mc") {
                              if(!message.channel.guild) return message.reply('** This command only for servers**');
@@ -86,7 +88,9 @@ client.on('message', message => {
       }
          
 });
+
 /
+
 client.on('message', msg => {
 
   if (msg.content === '.') {
@@ -96,7 +100,9 @@ client.on('message', msg => {
   }
 
 });
+
 /
+
 client.on('message', msg => {
 
   if (msg.author.bot) return;
@@ -144,6 +150,7 @@ client.on('message', msg => {
 });
 
 /
+
   client.on('message', message => {
 
     if(message.content.includes('discord.gg')){
@@ -163,6 +170,7 @@ client.on('message', msg => {
 });
 
 /
+
   client.on('message', message => {
 
     if(message.content.includes('youtube')){
@@ -180,7 +188,9 @@ client.on('message', msg => {
 }
 
 });
+
 /
+
 client.on('message',async message => {
   if(message.content.startsWith(prefix + "bcall")) {
 if(message.member.hasPermissions(['ADMINISTRATOR'])) {
@@ -223,7 +233,9 @@ if(message.member.hasPermissions(['ADMINISTRATOR'])) {
 } else return message.reply('لا يوجد لديك الصلاحيات')
   }
 });
+
 /
+
 client.on('message', message => {
 
  if (message.content.startsWith('list')) {
@@ -241,7 +253,9 @@ message.channel.send({ embed: norElden });
   }
 
 });
+
 /
+
 client.on('message', message => {
 
   if (message.author.bot) return;
@@ -279,7 +293,9 @@ message.channel.send(args.join("  "))
 
 
 });
+
 /
+
     client.on('message' , message => {
 
       if(message.content === 'Voice Online') {
@@ -289,7 +305,9 @@ message.channel.send(args.join("  "))
         }
 
         });
+
 /
+
     client.on('message', message => {
    if(message.content.startsWith(prefix + "invites")) {
     message.guild.fetchInvites().then(invs => {
@@ -300,7 +318,9 @@ message.channel.send(`**${user} has ${inviteCount} invites.**`);
 });
   }
 });
+
 /
+
  client.on('message', message => {
     if(message.content.startsWith(prefix + 'move all')) {
      if (!message.member.hasPermission("MOVE_MEMBERS")) return message.channel.send('**لايوجد لديك صلاحية سحب الأعضاء**');
@@ -316,7 +336,9 @@ message.channel.send(`**${user} has ${inviteCount} invites.**`);
 
      }
        });
+
 /
+
     client.on('message', message => {
 if(!message.channel.guild) return;
 if(message.content.startsWith(prefix + 'move')) {
@@ -350,7 +372,9 @@ message.react("❌")
  }
 }
 });
+
 /
+
  client.on('message', message => {
      if (message.author.bot) return;
 if (message.content.startsWith(prefix + "uptime")) {
@@ -394,7 +418,9 @@ if (message.content.startsWith(prefix + "uptime")) {
 
 }
 });
+
 /
+
 const adminprefix = "$";
 const devs = ['368768446327947265'];
 
@@ -409,7 +435,9 @@ if(message.content === adminprefix + "restart") {
     }
   
   });
+
 /
+
 client.on("message", message => {
 	var args = message.content.split(' ').slice(1); 
 	var msg = message.content.toLowerCase();
@@ -473,7 +501,9 @@ client.on('message', message =>{
         message.channel.send(`**\`\`\`xl\n${res}\`\`\`**`);
     }
 });
+
 /
+
 client.on('message', message => { 
            if (message.content.startsWith(prefix + "id")) {
      var args = message.content.split(" ").slice(1);
@@ -502,6 +532,7 @@ client.on('message', message => {
     .setThumbnail(heg.avatarURL);
     message.channel.send(id)
 }       });
+
 /
 
 client.login(process.env.BOT_TOKEN); 
