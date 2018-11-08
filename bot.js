@@ -61,7 +61,7 @@ client.on('message', function(message) {
     }
 });
 
-/
+///
 
 client.on('message', message => {
          if(message.content === prefix + "mc") {
@@ -89,7 +89,7 @@ client.on('message', message => {
          
 });
 
-/
+///
 
 client.on('message', msg => {
 
@@ -101,7 +101,7 @@ client.on('message', msg => {
 
 });
 
-/
+///
 
 client.on('message', msg => {
 
@@ -149,7 +149,7 @@ client.on('message', msg => {
 
 });
 
-/
+///
 
   client.on('message', message => {
 
@@ -169,7 +169,7 @@ client.on('message', msg => {
 
 });
 
-/
+///
 
   client.on('message', message => {
 
@@ -189,7 +189,7 @@ client.on('message', msg => {
 
 });
 
-/
+///
 
 client.on('message',async message => {
   if(message.content.startsWith(prefix + "bcall")) {
@@ -234,7 +234,7 @@ if(message.member.hasPermissions(['ADMINISTRATOR'])) {
   }
 });
 
-/
+///
 
 client.on('message', message => {
 
@@ -254,7 +254,7 @@ message.channel.send({ embed: norElden });
 
 });
 
-/
+///
 
 client.on('message', message => {
 
@@ -294,7 +294,7 @@ message.channel.send(args.join("  "))
 
 });
 
-/
+///
 
     client.on('message' , message => {
 
@@ -306,7 +306,7 @@ message.channel.send(args.join("  "))
 
         });
 
-/
+///
 
     client.on('message', message => {
    if(message.content.startsWith(prefix + "invites")) {
@@ -319,7 +319,7 @@ message.channel.send(`**${user} has ${inviteCount} invites.**`);
   }
 });
 
-/
+///
 
  client.on('message', message => {
     if(message.content.startsWith(prefix + 'move all')) {
@@ -337,7 +337,7 @@ message.channel.send(`**${user} has ${inviteCount} invites.**`);
      }
        });
 
-/
+///
 
     client.on('message', message => {
 if(!message.channel.guild) return;
@@ -373,7 +373,7 @@ message.react("❌")
 }
 });
 
-/
+///
 
  client.on('message', message => {
      if (message.author.bot) return;
@@ -419,7 +419,7 @@ if (message.content.startsWith(prefix + "uptime")) {
 }
 });
 
-/
+///
 
 const adminprefix = "$";
 const devs = ['368768446327947265'];
@@ -436,7 +436,7 @@ if(message.content === adminprefix + "restart") {
   
   });
 
-/
+///
 
 client.on("message", message => {
 	var args = message.content.split(' ').slice(1); 
@@ -502,7 +502,7 @@ client.on('message', message =>{
     }
 });
 
-/
+///
 
 client.on('message', message => { 
            if (message.content.startsWith(prefix + "id")) {
@@ -533,6 +533,6 @@ client.on('message', message => {
     message.channel.send(id)
 }       });
 
-/
+///
 
 client.login(process.env.BOT_TOKEN); 
