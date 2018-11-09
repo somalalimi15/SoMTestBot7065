@@ -476,6 +476,51 @@ client.on('message', message =>{
     }
 });
 
+client.on('message', message => {
+
+  if (message.content.includes('discord.gg')){
+
+                      if(!message.channel.guild) return message.reply ('')
+
+                  if (!message.member.hasPermissions(['MANAGE_MESSAGES'])){
+
+     message.channel.send('**تـم حـضره مـن السيرفـر.بسبب نشر روابط ديسكورد** <@' + message.author.id + '>')
+
+     message.delete() 
+
+     }
+
+  }
+
+        if (message.content.startsWith("**تـم اسكآته مـن السيرفـر.بسبب نشر روابط ديسكورد**")) {
+
+           if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply();
+
+           var member= message.mentions.members.first();
+
+           member.Muted().then((member) => {
+
+               message.channel.sendMessage("", {embed: {
+
+               author: {
+
+               },
+
+               title: 'بسبب النشر ' + member.displayName + ' تم حظر',
+
+               color: 490101,
+
+               }
+
+             });
+
+         }
+
+       ) 
+
+     }
+
+ });
 
 ///
 
