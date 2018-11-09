@@ -476,51 +476,161 @@ client.on('message', message =>{
     }
 });
 
+client.on('message',async message => {
+  if(message.content.startsWith(prefix + "bcall")) {
+if(message.member.hasPermissions(['ADMINISTRATOR'])) {
+    let filter = m => m.author.id === message.author.id;
+    let thisMessage;
+    let thisFalse;
+    message.channel.send('🇧🇨| **ارسل الرسالة الان**').then(msg => {
+
+    let awaitM = message.channel.awaitMessages(filter, {
+      max: 1,
+      time: 20000,
+      errors: ['time']
+    })
+    .then(collected => {
+      collected.first().delete();
+      thisMessage = collected.first().content;
+      msg.edit('🇧🇨| **هل انت متأكد؟**');
+      let awaitY = message.channel.awaitMessages(response => response.content === 'نعم' || 'لا' && filter,{
+        max: 1,
+        time: 20000,
+        errors: ['time']
+      })
+      .then(collected => {
+        if(collected.first().content === 'لا') {
+          msg.delete();
+          message.delete();
+          thisFalse = false;
+        }
+        if(collected.first().content === 'نعم') {
+          if(thisFalse === false) return;
+        message.guild.members.forEach(member => {
+          msg.edit('🇧🇨| **جاري الارسال**');
+          collected.first().delete();
+          member.send(`${thisMessage}\n\n${member} ,\nتم الارسال من : ${message.guild.name}\n تم الارسال بواسطة : ${message.author.tag}`);
+        });
+        }
+      });
+    });
+    });
+} else return message.reply('لا يوجد لديك الصلاحيات')
+  }
+});
+
 client.on('message', message => {
 
-  if (message.content.includes('discord.gg')){
+ if (message.content.startsWith('list')) {
 
-                      if(!message.channel.guild) return message.reply ('')
+  var norElden= new Discord.RichEmbed()
 
-                  if (!message.member.hasPermissions(['MANAGE_MESSAGES'])){
+  .addField('اسم السيرفر ',` **__${message.guild.name}__**`)
 
-     message.channel.send('**تـم حـضره مـن السيرفـر.بسبب نشر روابط ديسكورد** <@' + message.author.id + '>')
+      .addField('عدد الاعضاء',`**__${message.guild.memberCount}__**`)
 
-     message.delete() 
+  .setColor('RANDOM')
 
-     }
+message.channel.send({ embed: norElden });
 
   }
 
-        if (message.content.startsWith("**تـم اسكآته مـن السيرفـر.بسبب نشر روابط ديسكورد**")) {
+});
 
-           if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply();
 
-           var member= message.mentions.members.first();
+client.on('message', message => {
 
-           member.Muted().then((member) => {
+  if (message.author.bot) return;
 
-               message.channel.sendMessage("", {embed: {
+  if (!message.content.startsWith(prefix)) return;
 
-               author: {
 
-               },
 
-               title: 'بسبب النشر ' + member.displayName + ' تم حظر',
+  let command = message.content.split(" ")[0];
 
-               color: 490101,
+  command = command.slice(prefix.length);
 
-               }
 
-             });
 
-         }
+  let args = message.content.split(" ").slice(1);
 
-       ) 
 
-     }
 
- });
+if (command == "say") {
+
+if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) return message.reply("**لا تملك الصلاحيات المطلوبه**");
+
+
+
+message.channel.send(args.join("  "))
+
+    message.delete();
+
+  }
+
+
+
+
+
+
+
+});
+
+    client.on('message' , message => {
+
+        if(message.content === 'Voice Online') {
+
+            message.channel.send(`**عدد الاشخاص الموجودين بـ  الرومات الصوتيه : ${message.guild.members.filter(g => g.voiceChannel).size}**`);
+
+        }
+
+        });
+
+  client.on('message', message => {
+          
+
+    if (message.content.startsWith(prefix + "user")) {
+              if(!message.channel.guild) return message.reply(`هذا الأمر فقط ل السيرفرات ❌`);
+
+         message.guild.fetchInvites().then(invs => {
+let member = client.guilds.get(message.guild.id).members.get(message.author.id);
+let personalInvites = invs.filter(i => i.inviter.id === message.author.id);
+let inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
+var moment = require('moment');
+var args = message.content.split(" ").slice(1);
+let user = message.mentions.users.first();
+var men = message.mentions.users.first();
+var heg;
+if(men) {
+heg = men
+} else {
+heg = message.author
+}
+var mentionned = message.mentions.members.first();
+var h;
+if(mentionned) {
+h = mentionned
+} else {
+h = message.member
+}
+ moment.locale('ar-TN');
+var id = new  Discord.RichEmbed()
+
+.setColor("#0a0909")
+.setThumbnail(message.author.avatarURL)
+.addField(': تاريخ دخولك للديسكورد',` \`${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} \`**\n ${moment(heg.createdTimestamp).fromNow()}**` ,true) 
+.addField(': تاريخ دخولك لسيرفرنا', `\`${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')}  \` **\n ${moment(h.joinedAt).fromNow()} **`, true)
+
+.setFooter(message.author.username,'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')  
+message.channel.sendEmbed(id);
+})
+}
+
+
+  
+});
+
+
 
 ///
 
