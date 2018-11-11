@@ -6,6 +6,93 @@ const client = new Discord.Client();
 const Canvas = require("canvas"); //npm i canvas
 const prefix = "$"
 
+client.on('guildMemberAdd', member=> {
+
+
+
+    client.channels.get("506518353855119402").send(`** # Wèlčomè Ťo Marble..  **
+    **# YourName.**: ${member} .`);
+
+    });
+
+var dat = JSON.parse("{}");
+function forEachObject(obj, func) {
+    Object.keys(obj).forEach(function (key) { func(key, obj[key]) })
+}
+client.on("ready", () => {
+    var guild;
+    while (!guild)
+        guild = client.guilds.find("name", "Marble Server")
+    guild.fetchInvites().then((data) => {
+        data.forEach((Invite, key, map) => {
+            var Inv = Invite.code;
+            dat[Inv] = Invite.uses;
+        })
+    })
+})
+client.on("guildMemberAdd", (member) => {
+    let channel = member.guild.channels.find('name', 'marble');
+    if (!channel) {
+        console.log("!channel fails");
+        return;
+    }
+    if (member.id == client.user.id) {
+        return;
+    }
+    console.log('made it till here!');
+    var guild;
+    while (!guild)
+        guild = client.guilds.find("name", "Marble Server")
+    guild.fetchInvites().then((data) => {
+        data.forEach((Invite, key, map) => {
+            var Inv = Invite.code;
+            if (dat[Inv])
+                if (dat[Inv] < Invite.uses) {
+                    console.log(3);
+                    console.log(`${member} joined over ${Invite.inviter}'s invite ${Invite.code}`)
+ channel.send(`** Joined By : # ${Invite.inviter}   ** `)            
+ }
+            dat[Inv] = Invite.uses;
+        })
+    })
+});
+
+client.on("guildMemberAdd", member => {
+  member.createDM().then(function (channel) {
+  return channel.send(`**Welcome To Marble**.'
+   ${member}`) 
+}).catch(console.error)
+})
+
+
+
+var ss = 0;
+ 
+client.on('voiceStateUpdate', (o,n) => {
+    if (o.voiceChannel && !n.voiceChannel) {
+        ss-=1
+        n.guild.channels.get("511194320020439041").edit({
+            name : "# Marble Online. : [" + ss+ "]"
+        })
+    };
+    if (n.voiceChannel && !o.voiceChannel) {
+        ss+=1
+        n.guild.channels.get("511194320020439041").edit({
+            name : "# Marble Online. : [" + ss+ "]"
+        })
+    }
+})
+client.on("ready", () => {
+    client.guilds.get("494530123173724160").members.forEach(m => {
+        if (m.voiceChannel) {
+            ss+=1
+        };
+        client.channels.get("511194320020439041").edit({
+            name : "# Marble Online. : [" + ss+ "]"
+        })
+    });
+ 
+});
 
 
 client.on('message', function(message) {
@@ -836,12 +923,6 @@ const channel = sWlc[message.guild.id].channel
     message.channel.send(`**${message.guild.name}'s channel has been changed to ${newChannel}**`);
   }
 });
- 
- 
- 
- 
- 
-
 client.on("guildMemberAdd", member => {
       if(!sWlc[member.guild.id]) sWlc[member.guild.id] = {
     channel: "welcome"
@@ -862,64 +943,6 @@ client.on("guildMemberAdd", member => {
   .setFooter(client.user.username,client.user.avatarURL)
      welcomer.send({embed:mrxembed});          
          
-      var Canvas = require('canvas')
-      var jimp = require('jimp')
-     
-      const w = ['welcome_4.png'];
-     
-              let Image = Canvas.Image,
-                  canvas = new Canvas(557, 241),
-                  ctx = canvas.getContext('2d');
- 
-              fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
-                  if (err) return console.log(err)
-                  let BG = Canvas.Image;
-                  let ground = new Image;
-                  ground.src = Background;
-                  ctx.drawImage(ground, 0, 0, 540, 230);
-     
-      })
-     
-                      let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(5, -20) + ".gif" : member.user.displayAvatarURL;
-                      jimp.read(url, (err, ava) => {
-                          if (err) return console.log(err);
-                          ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
-                              if (err) return console.log(err);
-     
-                                    ctx.font = '21px kathen';
-                              ctx.fontSize = '25px';
-                              ctx.fillStyle = "#FFFFFF";
-                                ctx.fillText(member.user.username, 240, 150);
-                             
-                              //NAMEً
-                              ctx.font = '21px kathen';
-                              ctx.fontSize = '20px';
-                              ctx.fillStyle = "#FFFFFF";
-      ctx.fillText(`Welcome To ${member.guild.name}`, 240, 90);
-     
-                              //AVATARً
-                              let Avatar = Canvas.Image;
-                              let ava = new Avatar;
-                              ava.src = buf;
-                              ctx.beginPath();
-                 ctx.arc(120.8, 120.5, 112.3, 0, Math.PI*2, true);
-                   ctx.closePath();
-                   
-                                 ctx.clip();
- 
-                        ctx.drawImage(ava, 7, 8, 227, 225);
-                              ctx.closePath();
- 
-                           
-    welcomer.sendFile(canvas.toBuffer())
-     
-     
-     
-      })
-      })
-     
-      }
-      });
-
+   
 
 client.login(process.env.BOT_TOKEN); 
