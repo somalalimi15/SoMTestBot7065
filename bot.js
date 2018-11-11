@@ -7,10 +7,7 @@ const Canvas = require("canvas"); //npm i canvas
 const prefix = "$"
 
 client.on('guildMemberAdd', member=> {
-
-
-
-    client.channels.get("506518353855119402").send(`** # Wèlčomè Ťo Marble..  **
+    client.channels.get("503887857988141056").send(`** # Wèlčomè Ťo Marble..  **
     **# YourName.**: ${member} .`);
 
     });
